@@ -1,12 +1,12 @@
 'use client';
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm,Controller  } from "react-hook-form";
 import { useState } from "react";
 
 import "../styles/form.css"
 
 const MyForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register,control, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => console.log(data);
   const [referenceFrom , setReferenceType]= useState()
 
@@ -25,19 +25,35 @@ const MyForm = () => {
             {errors.visitType && <span>This field is required</span>}
           </div>
 
-          <div className="refernce-cont">
+          <div className="reference-cont">
             <div style={{ width: "50%" }}>
               <label htmlFor="reference">Where did you hear about Scentral Park?</label>
-              <select style={{ width: "50%" }} onChange={(e)=>{setReferenceType(e.target.value)}} {...register("reference", { required: true })}>
-                <option value="Google Search">Google Search</option>
-                <option value="Instagram Ad or Post">Instagram Ad or Post</option>
-                <option value="Facebook Ad or Post">Facebook Ad or Post</option>
-                <option value="WhatsApp Group or Forward">WhatsApp Group or Forward</option>
-                <option value="Word of Mouth Reviews from friends">Word of Mouth Reviews from friends</option>
-                <option value="Radio">Radio</option>
-                <option value="Podcast">Podcast</option>
-                <option value="Other">Other</option>
-              </select>
+              <Controller
+                name="reference"
+                control={control}
+                defaultValue=""
+                rules={{ required: "This field is required" }}
+                render={({ field }) => (
+                  <select
+                    style={{ width: "50%" }}
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      setReferenceType(e.target.value)
+                    }}
+                  >
+                    <option value="">Select an option</option>
+                    <option value="Google Search">Google Search</option>
+                    <option value="Instagram Ad or Post">Instagram Ad or Post</option>
+                    <option value="Facebook Ad or Post">Facebook Ad or Post</option>
+                    <option value="WhatsApp Group or Forward">WhatsApp Group or Forward</option>
+                    <option value="Word of Mouth Reviews from friends">Word of Mouth Reviews from friends</option>
+                    <option value="Radio">Radio</option>
+                    <option value="Podcast">Podcast</option>
+                    <option value="Other">Other</option>
+                  </select>
+                )}
+              />
               {referenceFrom === "Other" && <input {...register("otherReason")} className="other-reason" type="text" />}
               {errors.reference && <span>This field is required</span>}
             </div>

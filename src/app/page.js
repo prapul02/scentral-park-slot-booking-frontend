@@ -1,9 +1,14 @@
 import Image from "next/image";
-import styles from "./page.module.css";
+
 import MyForm from "@/components/MyForm";
+import Header from "@/components/Header";
 
 export default function Home() {
+
   return (
+    <div className = "app-container">
+    <Header/>
     <MyForm/>
+    </div>
   );
 }

@@ -13,7 +13,7 @@ const MyForm = () => {
   return (
     <div style={{ position: "absolute", marginTop: "3%", width: "90%" }}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h3>Please fill this form to place a Request for a Slot. </h3>
+        <h3>Please fill this form to place a request for a slot. </h3>
         <div className={"form-fields-cont"}>
           <div>
             <label htmlFor="visitType">Were you the Primary Contact on a Prior Booking? Select from the dropdown below, pls</label>
